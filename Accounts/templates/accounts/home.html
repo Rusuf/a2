@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'home1' %}">Bank</a>
+    
+
+</head>
+<body>
+    <h1>AQ Bank</h1>
+    <img src="{% static 'images/money4.jpg' %}" alt="AQ Bank Logo" class="logo">
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'register' %}">Register</a>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+    <a href="{% url 'home' %}">Home</a>
+</head>
+<body>
+    <h2>Profile</h2>
+    <img src="{% static 'images/pexels-davidmcbee-730547.jpg' %}" alt="Profile Image" class="profile-image">
+    <form method="POST">
+        {% csrf_token %}
+        {{ u_form.as_p }}
+        <button type="submit">Update Profile</button>
+    </form>
+</body>
+</html>

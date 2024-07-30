@@ -1,0 +1,46 @@
+/* profile.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #8B4513; /* Brown background color */
+    text-align: center;
+}
+
+h2 {
+    color: #fff;
+    margin-top: 50px;
+}
+
+.profile-image {
+    width: 300px; /* Adjust the size as needed */
+    margin: 20px 0;
+}
+
+form {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+form p {
+    text-align: left;
+    color: #fff;
+}
+
+button {
+    display: inline-block;
+    margin: 10px 20px;
+    padding: 10px 20px;
+    color: white;
+    background-color: #007BFF;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
