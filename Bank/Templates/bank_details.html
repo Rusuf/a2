@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Details</title>
+</head>
+<body>
+    <h2>Bank Details</h2>
+    <p><strong>Name:</strong> {{ bank.name }}</p>
+    <p><strong>Description:</strong> {{ bank.description }}</p>
+    <p><strong>Institution Number:</strong> {{ bank.inst_num }}</p>
+    <p><strong>SWIFT Code:</strong> {{ bank.swift_code }}</p>
+    <h3>Branches</h3>
+    <ul>
+        {% for branch in branches %}
+            <li><a href="{% url 'branch_details' branch_id=branch.id %}">{{ branch.name }}</a></li>
+        {% empty %}
+            <li>No branches available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

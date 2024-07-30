@@ -4,15 +4,26 @@
     <title>Login</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
-    <a href="{% url 'home' %}">Home</a>
 </head>
 <body>
-    <h2>Login</h2>
-    <img src="{% static 'images/money2.jpg' %}" alt="AQ Bank Logo" class="logo">
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <a href="{% url 'home' %}">Home</a>
+            </nav>
+        </header>
+        <main class="main-content">
+            <div class="overlay"></div>
+            <div class="content">
+                <h2 class="login-title">Login</h2>
+                <img src="{% static 'images/money2.jpg' %}" alt="AQ Bank Logo" class="logo">
+                <form method="post" class="login-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

@@ -1,10 +1,14 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden, HttpResponseNotFound
-from .models import Bank, Branch
+from django.http import HttpResponseForbidden
 from .forms import BankForm, BranchForm
+from .models import Bank, Branch
 
-@login_required
+def home(request):
+    return render(request, 'bank/home.html')
+
+
+
 def add_bank(request):
     if request.method == 'POST':
         form = BankForm(request.POST)
@@ -12,27 +16,28 @@ def add_bank(request):
             bank = form.save(commit=False)
             bank.owner = request.user
             bank.save()
-            return redirect(f'/banks/{bank.id}/details/')
+            return redirect('bank_details', bank_id=bank.id)
     else:
         form = BankForm()
     return render(request, 'bank/add_bank.html', {'form': form})
 
-@login_required
-def add_branch(request, bank_id):
-    bank = get_object_or_404(Bank, id=bank_id)
-    if bank.owner != request.user:
-        return HttpResponseForbidden()
 
+def add_branch(request):
     if request.method == 'POST':
         form = BranchForm(request.POST)
         if form.is_valid():
-            branch = form.save(commit=False)
-            branch.bank = bank
-            branch.save()
-            return redirect(f'/banks/branch/{branch.id}/details/')
+            branch = form.save()
+            return redirect('branch_details', branch_id=branch.id)
     else:
-        form = BranchForm(initial={'email': 'default@example.com'})
+        form = BranchForm()
     return render(request, 'bank/add_branch.html', {'form': form})
 
-def home(request):
-    return render(request, 'bank/home.html')
+def bank_details(request, bank_id):
+    bank = get_object_or_404(Bank, id=bank_id)
+    return render(request, 'bank/bank_details.html', {'bank': bank})
+
+
+def branch_details(request, branch_id):
+    branch = get_object_or_404(Branch, id=branch_id)
+    return render(request, 'bank/branch_details.html', {'branch': branch})
+

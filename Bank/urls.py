@@ -6,5 +6,4 @@ urlpatterns = [
     path('bank/add_bank', views.add_bank, name='banks'),
     path('bank/add_branch', views.add_branch, name='branches'),
 
-
 ]

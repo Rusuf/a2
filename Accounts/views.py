@@ -33,7 +33,7 @@ def profile(request):
         'u_form': u_form
     }    
 
-    return render(request, 'Accounts/profile.html', context)
+    return render(request, 'accounts/profile.html', context)
 
 def home(request):
-    return render(request, 'Accounts/home.html')
+    return render(request, 'accounts/home.html')

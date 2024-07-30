@@ -4,15 +4,25 @@
     <title>Register</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
-    <a href="{% url 'home' %}">Home</a>
 </head>
 <body>
-    <h2>Register</h2>
-    <img src="{% static 'images/money4.jpg' %}" alt="Register Image" class="register-image">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
+    <div class="container">
+        <header class="header">
+            <nav class="navbar">
+                <a href="{% url 'home' %}">Home</a>
+            </nav>
+        </header>
+        <main class="main-content">
+            <div class="overlay"></div>
+            <div class="content">
+                <h2 class="register-title">Register</h2>
+                <form method="POST" class="register-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
