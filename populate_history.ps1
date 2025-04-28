@@ -4,7 +4,9 @@ git config --global user.email "your.github@email.com"  # Replace with your actu
 
 # Function to make a commit for a specific date
 function Make-Commit {
-    param($date)
+    param (
+        [string]$date
+    )
     # Create or modify a file
     Add-Content -Path "temp.txt" -Value "Update on $date"
     # Add and commit with the specified date
@@ -14,20 +16,27 @@ function Make-Commit {
     git commit -m "Update on $date"
 }
 
-# Starting from April 2024
-$startDate = Get-Date "2024-04-19"
-$endDate = Get-Date "2025-04-19"
-$currentDate = $startDate
+# Starting from April last year
+$start_date = "2023-04-01"
+$end_date = "2024-04-19"
+
+# Convert dates to seconds since epoch
+$start_seconds = (Get-Date $start_date).ToUniversalTime().Subtract((Get-Date "1970-01-01")).TotalSeconds
+$end_seconds = (Get-Date $end_date).ToUniversalTime().Subtract((Get-Date "1970-01-01")).TotalSeconds
 
 # Make commits for random days
-while ($currentDate -le $endDate) {
+$day_seconds = 86400
+$current_seconds = $start_seconds
+
+while ($current_seconds -le $end_seconds) {
     # Randomly decide whether to make a commit (30% probability)
-    if ((Get-Random -Minimum 1 -Maximum 100) -lt 30) {
-        $commitDate = $currentDate.ToString("yyyy-MM-dd 12:00:00 +0000")
-        Make-Commit $commitDate
+    if ((Get-Random -Minimum 0 -Maximum 100) -lt 30) {
+        $commit_date = (Get-Date "1970-01-01").AddSeconds($current_seconds).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss +0000")
+        Write-Host "Making commit for $commit_date"
+        Make-Commit -date $commit_date
     }
-    $currentDate = $currentDate.AddDays(1)
+    $current_seconds += $day_seconds
 }
 
 # Clean up
-Remove-Item temp.txt 
+Remove-Item -Path "temp.txt" -Force 
